@@ -53,7 +53,7 @@ def generate_label():
         name = data['name']
         phone_number = data['phone']
         destination_address = data['destination_address']
-        origin_address = data['origin_address']
+        origin_address = data['source_address']
         comment = data['comment']
 
         #nombre_cliente = "PATPRIMO"
