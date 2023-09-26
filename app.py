@@ -64,7 +64,7 @@ def generate_label():
             box_size=10,
             border=4,
         )
-        qr.add_data(numero_orden)
+        qr.add_data(order_number)
         qr.make(fit=True)
 
         qr_img = qr.make_image(fill_color="black", back_color="white")
@@ -74,7 +74,7 @@ def generate_label():
         qr_img.save(buffer, format="PNG")
         qr_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
 
-        etiqueta_html = render_template_string('''
+        label_html = render_template_string('''
             <!DOCTYPE html>
             <html>
             <head>
