@@ -93,7 +93,7 @@ def generar_etiqueta():
                         grid-template-rows: 1fr 1fr 1fr;
                         grid-template-columns: 1fr 1fr 1fr;
                         grid-template-areas:
-                            "logo numero cantidad"
+                            "logo numero numero"
                             "origen origen origen"
                             "destino destino destino"
                             "qr qr qr";
@@ -150,7 +150,6 @@ def generar_etiqueta():
             </html>
         ''',
         numero_orden=numero_orden,
-        cantidad_paquetes=cantidad_paquetes,
         direccion_origen=direccion_origen,
         direccion=direccion,
         qr_base64=qr_base64,
