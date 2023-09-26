@@ -16,24 +16,24 @@ def index():
     </head>
     <body>
         <h1>Generar Etiqueta</h1>
-        <form method="POST" action="/generar_etiqueta">
-            <label for="numero_orden">Número de Orden:</label>
-            <input type="text" name="numero_orden" required><br><br>
+        <form method="POST" action="/generar_label">
+            <label for="order_number">Número de Orden:</label>
+            <input type="text" name="order_number" required><br><br>
 
-            <label for="nombre_completo">Nombre Completo:</label>
-            <input type="text" name="nombre_completo" required><br><br>
+            <label for="name">Nombre Completo:</label>
+            <input type="text" name="name" required><br><br>
 
-            <label for="telefono">Teléfono:</label>
-            <input type="text" name="telefono" required><br><br>
+            <label for="phone_number">Teléfono:</label>
+            <input type="text" name="phone_number" required><br><br>
 
-            <label for="direccion">Dirección:</label>
-            <input type="text" name="direccion" required><br><br>
+            <label for="destination_address">Dirección:</label>
+            <input type="text" name="destination_address" required><br><br>
 
-            <label for="direccion_origen">Dirección de Origen:</label>
-            <input type="text" name="direccion_origen" required><br><br>
+            <label for="origin_address">Dirección de Origen:</label>
+            <input type="text" name="origin_address" required><br><br>
 
-            <label for="observaciones">Observaciones:</label>
-            <textarea name="observaciones" rows="4" cols="50" required></textarea><br><br>
+            <label for="comment">Observaciones:</label>
+            <textarea name="comment" rows="4" cols="50" required></textarea><br><br>
 
             <input type="submit" value="Generar Etiqueta">
         </form>
@@ -41,23 +41,22 @@ def index():
     </html>
     '''
 
-@app.route('/generar_etiqueta', methods=['POST'])
-def generar_etiqueta():
+@app.route('/generate_label', methods=['POST'])
+def generate_label():
     try:
         if request.form:
-            datos = request.form
+            data = request.form
         else:
-            datos = request.json
+            data = request.json
 
-        numero_orden = datos['numero_orden']
-        nombre_completo = datos['nombre_completo']
-        telefono = datos['telefono']
-        direccion = datos['direccion']
-        #cantidad_paquetes = datos['cantidad_paquetes']
-        direccion_origen = datos['direccion_origen']
-        observaciones = datos['observaciones']
+        order_number = data['order_number']
+        name = data['name']
+        phone_number = data['phone']
+        destination_address = data['destination_address']
+        origin_address = data['origin_address']
+        comment = data['comment']
 
-        nombre_cliente = "PATPRIMO"
+        #nombre_cliente = "PATPRIMO"
 
         qr = qrcode.QRCode(
             version=1,
@@ -79,24 +78,24 @@ def generar_etiqueta():
             <!DOCTYPE html>
             <html>
             <head>
-                <title>Etiqueta</title>
+                <title>Label</title>
                 <style>
-                    .etiqueta {
+                    .label {
                         font-family: Arial, sans-serif;
                         text-align: center;
                         margin: 10px;
                         padding: 10px;
                         width: 10cm;
                         height: 10cm;
-                        border: 2px solid black;
+                        border: 12px solid black;
                         display: grid;
-                        grid-template-rows: 1fr 1fr 1fr;
-                        grid-template-columns: 1fr 1fr 1fr;
                         grid-template-areas:
-                            "logo numero numero"
-                            "origen origen origen"
-                            "destino destino destino"
-                            "qr qr qr";
+                            "logo logo origin"
+                            "qr qr number"
+                            "qr qr name"
+                            ". . phone"
+                            ". . destination
+                            ". . comment;
                     }
                     .logo {
                         grid-area: logo;
@@ -107,60 +106,87 @@ def generar_etiqueta():
                         width: 100px;
                         height: 100px;
                     }
-                    .numero {
-                        grid-area: numero;
+                    .number {
+                        grid-area: number;
                         text-align: center;
                     }
-                    .origen {
-                        grid-area: origen;
+                    .origin {
+                        grid-area: origin;
                         text-align: center;
                     }
-                    .destino {
-                        grid-area: destino;
+                    .destination {
+                        grid-area: destination;
                         text-align: center;
                     }
                     .qr {
                         grid-area: qr;
                         text-align: center;
                     }
+                    .name {
+                        grid-area: name;
+                        text-align: center;
+                    }
+                    .phone {
+                        grid-area: phone;
+                        text-align: center;
+                    }
+                    .comment {
+                        grid-area: comment;
+                        text-align: center;
+                    }
                 </style>
             </head>
             <body>
-                <div class="etiqueta">
+                <div class="label">
                     <div class="logo">
-                        <img src="yango_logo.png" alt="Logo de Yango Deliver" />
+                        <img src="yango_logo.png" alt="Yango Delivery Logo" />
                     </div>
-                    <div class="numero">
+                    <div class="number">
                         <label>Número de Orden:</label><br>
-                        {{ numero_orden }}
+                        {{ order_number }}
                     </div>
-                    <div class="origen">
+                    <div class="origin">
                         <label>Dirección de Origen:</label><br>
-                        {{ direccion_origen }}
+                        {{ origin_address }}
                     </div>
-                    <div class="destino">
+                    <div class="destination">
                         <label>Dirección de Destino:</label><br>
-                        {{ direccion }}
+                        {{ destination_address }}
                     </div>
                     <div class="qr">
-                        <img src="data:image/png;base64,{{ qr_base64 }}" alt="Código QR" />
+                        <img src="data:image/png;base64,{{ qr_base64 }}" alt="QR code" />
+                    </div>
+                    <div class="name">
+                        <label>Nombre:</label><br>
+                        {{ name }}
+                    </div>
+                    <div class="phone">
+                        <label>Número de teléfono:</label><br>
+                        {{ phone_number }}
+                    </div>
+                    <div class="comment">
+                        <label>Observaciones:</label><br>
+                        {{ comment }}
                     </div>
                 </div>
             </body>
             </html>
         ''',
-        numero_orden=numero_orden,
-        direccion_origen=direccion_origen,
-        direccion=direccion,
+        order_number=order_number,
+        origin_address=origin_address,
+        destination_address=destination_address,
         qr_base64=qr_base64,
+        name=name,
+        phone_number=phone_number,
+        comment=comment
         )
 
         pdf_buffer = io.BytesIO()
-        pisa.CreatePDF(etiqueta_html, dest=pdf_buffer)
+        pisa.CreatePDF(label_html, dest=pdf_buffer)
 
         pdf_buffer.seek(0)
         response = Response(pdf_buffer.read(), content_type='application/pdf')
-        response.headers['Content-Disposition'] = 'inline; filename=etiqueta.pdf'
+        response.headers['Content-Disposition'] = 'inline; filename=label.pdf'
 
         return response
     except Exception as e:
