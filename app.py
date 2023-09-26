@@ -29,9 +29,6 @@ def index():
             <label for="direccion">Dirección:</label>
             <input type="text" name="direccion" required><br><br>
 
-            <label for="cantidad_paquetes">Cantidad de Paquetes:</label>
-            <input type="text" name="cantidad_paquetes" required><br><br>
-
             <label for="direccion_origen">Dirección de Origen:</label>
             <input type="text" name="direccion_origen" required><br><br>
 
@@ -56,7 +53,7 @@ def generar_etiqueta():
         nombre_completo = datos['nombre_completo']
         telefono = datos['telefono']
         direccion = datos['direccion']
-        cantidad_paquetes = datos['cantidad_paquetes']
+        #cantidad_paquetes = datos['cantidad_paquetes']
         direccion_origen = datos['direccion_origen']
         observaciones = datos['observaciones']
 
@@ -114,10 +111,6 @@ def generar_etiqueta():
                         grid-area: numero;
                         text-align: center;
                     }
-                    .cantidad {
-                        grid-area: cantidad;
-                        text-align: right;
-                    }
                     .origen {
                         grid-area: origen;
                         text-align: center;
@@ -140,10 +133,6 @@ def generar_etiqueta():
                     <div class="numero">
                         <label>Número de Orden:</label><br>
                         {{ numero_orden }}
-                    </div>
-                    <div class="cantidad">
-                        <label>Cantidad de Paquetes:</label><br>
-                        {{ cantidad_paquetes }}
                     </div>
                     <div class="origen">
                         <label>Dirección de Origen:</label><br>
