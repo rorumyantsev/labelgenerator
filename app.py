@@ -95,7 +95,7 @@ def generate_label():
                             "qr qr name"
                             ". . phone"
                             ". . destination"
-                            ". . comment;"
+                            ". . comment";
                     }
                     .logo {
                         grid-area: logo;
