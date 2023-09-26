@@ -172,8 +172,8 @@ def test():
         comment=comment
         )
 
-@app.route('/test2', methods=['POST'])
-def test():
+@app.route('/test2')
+def test2():
     order_number = "1234"
     name = "john doe"
     phone_number = "+573111111111"
