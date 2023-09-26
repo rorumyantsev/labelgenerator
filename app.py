@@ -41,7 +41,7 @@ def index():
     </html>
     '''
 
-@app.route('/test')
+@app.route('/test', methods=['POST'])
 def test():
     data = request.form
     order_number = data['order_number']
