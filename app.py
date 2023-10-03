@@ -150,32 +150,32 @@ def generate_label():
                     <div class="logo">
                         <img src="yango_logo.png" alt="Yango Delivery Logo" />
                     </div>
+                    <div class="qr">
+                        <img src="data:image/png;base64,{{ qr_base64 }}" alt="QR code" width=100px height=100px />
+                    </div>
                     <div class="number">
-                        <label>Número de Orden:</label><br>
+                        <label>Número de Orden: </label>
                         {{ order_number }}
                     </div>
                     <div class="origin">
-                        <label>Dirección de Origen:</label><br>
+                        <label>Dirección de Origen: </label>
                         {{ origin_address }}
                     </div>
                     <div class="destination">
-                        <label>Dirección de Destino:</label><br>
+                        <label>Dirección de Destino: </label>
                         {{ destination_address }}
                     </div>
                     <div class="name">
-                        <label>Nombre:</label><br>
+                        <label>Nombre: </label>
                         {{ name }}
                     </div>
                     <div class="phone">
-                        <label>Número de teléfono:</label><br>
+                        <label>Número de teléfono: </label>
                         {{ phone_number }}
                     </div>
                     <div class="comment">
-                        <label>Observaciones:</label><br>
+                        <label>Observaciones: </label>
                         {{ comment }}
-                    </div>
-                    <div class="qr">
-                        <img src="data:image/png;base64,{{ qr_base64 }}" alt="QR code" />
                     </div>
                 </div>
             </body>
