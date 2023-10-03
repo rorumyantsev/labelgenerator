@@ -299,7 +299,7 @@ def generate_label():
         )
 
         pdf_buffer = io.BytesIO()
-        pisa.CreatePDF(label_html, dest=pdf_buffer)
+        pisa.CreatePDF(alternative_html, dest=pdf_buffer)
 
         pdf_buffer.seek(0)
         response = Response(pdf_buffer.read(), content_type='application/pdf')
