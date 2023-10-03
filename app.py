@@ -76,6 +76,121 @@ def generate_label():
         qr_img.save(buffer, format="PNG")
         qr_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
 
+        alternative_html = render_template_string('''
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Label</title>
+                <style>
+                    @page {
+                        size: a4 portrait;
+                        @frame content_frame {
+                            left: 50pt; width: 250pt; top: 90pt; height: 300pt;
+                        }
+                    }
+                    
+                    .label {
+                        font-family: Arial, sans-serif;
+                        text-align: center;
+                        margin: 10px;
+                        padding: 10px;
+                        width: 10cm;
+                        height: 10cm;
+                        border: 2px solid black;
+                        display: grid;
+                        grid-template-areas:
+                            "logo logo origin"
+                            "qr qr number"
+                            "qr qr name"
+                            ". . phone"
+                            ". . destination"
+                            ". . comment";
+                    }
+                    .logo {
+                        grid-area: logo;
+                        padding: 10px;
+                        text-align: left;
+                    }
+                    .logo img {
+                        width: 100px;
+                        height: 100px;
+                    }
+                    .number {
+                        grid-area: number;
+                        text-align: center;
+                    }
+                    .origin {
+                        grid-area: origin;
+                        text-align: center;
+                    }
+                    .destination {
+                        grid-area: destination;
+                        text-align: center;
+                    }
+                    .qr {
+                        grid-area: qr;
+                        text-align: center;
+                    }
+                    .name {
+                        grid-area: name;
+                        text-align: center;
+                    }
+                    .phone {
+                        grid-area: phone;
+                        text-align: center;
+                    }
+                    .comment {
+                        grid-area: comment;
+                        text-align: center;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="label">
+                    <div class="logo">
+                        <img src="yango_logo.png" alt="Yango Delivery Logo" />
+                    </div>
+                    <div class="number">
+                        <label>Número de Orden:</label><br>
+                        {{ order_number }}
+                    </div>
+                    <div class="origin">
+                        <label>Dirección de Origen:</label><br>
+                        {{ origin_address }}
+                    </div>
+                    <div class="destination">
+                        <label>Dirección de Destino:</label><br>
+                        {{ destination_address }}
+                    </div>
+                    <div class="name">
+                        <label>Nombre:</label><br>
+                        {{ name }}
+                    </div>
+                    <div class="phone">
+                        <label>Número de teléfono:</label><br>
+                        {{ phone_number }}
+                    </div>
+                    <div class="comment">
+                        <label>Observaciones:</label><br>
+                        {{ comment }}
+                    </div>
+                    <div class="qr">
+                        <img src="data:image/png;base64,{{ qr_base64 }}" alt="QR code" />
+                    </div>
+                </div>
+            </body>
+            </html>
+        ''',
+        order_number=order_number,
+        origin_address=origin_address,
+        destination_address=destination_address,
+        qr_base64=qr_base64,
+        name=name,
+        phone_number=phone_number,
+        comment=comment
+        )
+        
+        
         label_html = render_template_string('''
             <!DOCTYPE html>
             <html>
