@@ -85,7 +85,7 @@ def generate_label():
                     @page {
                         size: a4 portrait;
                         @frame content_frame {
-                            left: 10pt; width: 190pt; top: 10pt; height: 190pt;
+                            left: 10pt; width: 290pt; top: 10pt; height: 290pt;
                         }
                     }
                     
@@ -112,8 +112,8 @@ def generate_label():
                         text-align: left;
                     }
                     .logo img {
-                        width: 100px;
-                        height: 100px;
+                        width: 50px;
+                        height: 50px;
                     }
                     .number {
                         grid-area: number;
