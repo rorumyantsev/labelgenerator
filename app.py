@@ -85,7 +85,7 @@ def generate_label():
                     @page {
                         size: a4 portrait;
                         @frame content_frame {
-                            left: 50pt; width: 250pt; top: 90pt; height: 300pt;
+                            left: 10pt; width: 190pt; top: 10pt; height: 190pt;
                         }
                     }
                     
