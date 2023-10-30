@@ -297,6 +297,7 @@ def generate_label():
         phone_number=phone_number,
         comment=comment
         )
+        #unusful_comment
 
         pdf_buffer = io.BytesIO()
         pisa.CreatePDF(alternative_html, dest=pdf_buffer)
